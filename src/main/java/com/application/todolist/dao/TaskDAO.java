@@ -49,6 +49,15 @@ public class TaskDAO {
         return jdbcTemplate.update(sql, params);
     }
 
+    public int deleteTask(int id) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", id);
+
+        String sql = " DELETE FROM tasks WHERE id = :id ";
+        
+        return jdbcTemplate.update(sql, params);
+    }
+
     private final RowMapper<Task> taskRowMapper = (rs, rowNum) -> {
         Task task = new Task();
         task.setId(rs.getInt("id"));
