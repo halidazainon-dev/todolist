@@ -36,6 +36,19 @@ public class TaskDAO {
         return jdbcTemplate.queryForObject(sql, params, Integer.class);
     }
 
+    public int updateTask(Task task) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", task.getId());
+        params.addValue("description", task.getDescription());
+        params.addValue("completed", task.isCompleted());
+        params.addValue("createdDate", task.getCreatedDate());
+
+        String sql = " UPDATE tasks SET description = :description, completed = :completed, created_date = :createdDate " +
+                    " WHERE id = :id ";
+
+        return jdbcTemplate.update(sql, params);
+    }
+
     private final RowMapper<Task> taskRowMapper = (rs, rowNum) -> {
         Task task = new Task();
         task.setId(rs.getInt("id"));
