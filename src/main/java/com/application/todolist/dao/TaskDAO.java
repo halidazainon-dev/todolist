@@ -23,6 +23,18 @@ public class TaskDAO {
         String sql = "SELECT * FROM tasks";
         return jdbcTemplate.query(sql, taskRowMapper);
     }
+    public int addTask(Task task) {
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("description", task.getDescription());
+        params.addValue("completed", task.isCompleted());
+        params.addValue("createdDate", task.getCreatedDate());
+
+        String sql = " INSERT INTO tasks (description, completed, created_date) " +
+                    " VALUES (:description, :completed, :createdDate) RETURNING id ";
+
+        return jdbcTemplate.queryForObject(sql, params, Integer.class);
+    }
 
     private final RowMapper<Task> taskRowMapper = (rs, rowNum) -> {
         Task task = new Task();
