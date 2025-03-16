@@ -106,5 +106,26 @@ public class TaskServiceTest {
         assert(existingTask.getDescription().equals(newDescription));
     }
 
+    @Test
+    public void testUpdateTaskStatus() throws Exception {
+        int taskId = 1;
+        boolean completedStatus = true;
+        Task existingTask = new Task(taskId, "Sample Task", false, new Date());
+
+        when(taskDAO.getId(taskId)).thenReturn(existingTask);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/updateTaskStatus")
+                        .param("id", String.valueOf(taskId))
+                        .param("completed", String.valueOf(completedStatus))
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())  
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/tasks"));  
+
+        verify(taskDAO, times(1)).getId(taskId);
+        verify(taskDAO, times(1)).updateTask(existingTask);
+
+        assert(existingTask.isCompleted() == completedStatus);
+    }
+
 
 }
