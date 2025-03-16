@@ -8,6 +8,9 @@ public class Task {
     private boolean completed;
     private Date createdDate;
 
+    public Task() {
+    }
+
     public Task(int id, String description, boolean completed, Date createdDate) {
         this.id = id;
         this.description = description;
