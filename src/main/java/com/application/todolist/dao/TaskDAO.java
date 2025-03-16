@@ -22,7 +22,16 @@ public class TaskDAO {
         String sql = "SELECT * FROM tasks";
         return jdbcTemplate.query(sql, taskRowMapper);
     }
-    
+
+    public Task getId(int id){
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", id);
+        
+        String sql = "SELECT * FROM tasks WHERE id = :id";
+        
+        return jdbcTemplate.queryForObject(sql, params, taskRowMapper);
+    }
+
     public int addTask(Task task) {
 
         MapSqlParameterSource params = new MapSqlParameterSource();
