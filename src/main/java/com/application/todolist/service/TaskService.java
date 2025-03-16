@@ -62,11 +62,17 @@ public class TaskService {
         return "redirect:/tasks";
     }
 
+    @PostMapping("/updateTaskStatus")
+        public String updateTaskStatus(@RequestParam("id") int id, @RequestParam("completed") boolean completed) {
+        Task task = taskDAO.getId(id);
+        task.setCompleted(completed);
+        taskDAO.updateTask(task);
+        return "redirect:/tasks";
+    }
+
     @PostMapping("/deleteAll")
     public String deleteAllTasks() {
         taskDAO.deleteAll();
         return "redirect:/tasks";
     }
-
-
 }
