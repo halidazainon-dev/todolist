@@ -52,7 +52,7 @@ public class TaskService {
         return ResponseEntity.ok("Task deleted successfully");
     }
 
-      @PostMapping("/update")
+    @PostMapping("/update")
     public String updateTask(@RequestParam("id") int id, @RequestParam("description") String description) {
         Task task = taskDAO.getId(id);
         task.setDescription(description);
@@ -61,5 +61,12 @@ public class TaskService {
         taskDAO.updateTask(task);
         return "redirect:/tasks";
     }
+
+    @PostMapping("/deleteAll")
+    public String deleteAllTasks() {
+        taskDAO.deleteAll();
+        return "redirect:/tasks";
+    }
+
 
 }
