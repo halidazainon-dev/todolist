@@ -31,6 +31,11 @@ public class TaskDAO {
         
         return jdbcTemplate.queryForObject(sql, params, taskRowMapper);
     }
+    
+    public int activeCount(){
+        String sql = "SELECT COUNT(*) FROM tasks WHERE completed = false";
+        return jdbcTemplate.queryForObject(sql, new MapSqlParameterSource(), Integer.class);
+    }
 
     public int addTask(Task task) {
 
