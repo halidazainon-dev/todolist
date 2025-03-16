@@ -4,7 +4,7 @@ $(document).ready(function() {
         let taskId = $(this).data("task-id");
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/delete/" + taskId,   
+            url: "/delete/" + taskId,   
             type: "DELETE",
             success: function(response) {
                 console.log(response);
@@ -43,7 +43,7 @@ $(document).ready(function() {
         formData.append("description", newDescription);
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/update",
+            url: "/update",
             type: "POST",
             data: formData,
             processData: false,
@@ -64,7 +64,7 @@ $(document).ready(function() {
     $("#delete-all-btn").click(function() {
         if (confirm("Are you sure you want to delete all tasks?")) {
             $.ajax({
-                url: "${pageContext.request.contextPath}/deleteAll",
+                url: "/deleteAll",
                 type: "POST",
                 success: function(response) {
                     console.log(response);
@@ -86,7 +86,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '${pageContext.request.contextPath}/updateTaskStatus',
+            url: '/updateTaskStatus',
             data: {
                 id: taskId,
                 completed: completed
