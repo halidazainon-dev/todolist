@@ -127,5 +127,14 @@ public class TaskServiceTest {
         assert(existingTask.isCompleted() == completedStatus);
     }
 
+    @Test
+    public void testDeleteAllTasks() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/deleteAll")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())  
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/tasks")); // Redirects to /tasks
+
+        verify(taskDAO, times(1)).deleteAll();
+    }
 
 }
