@@ -70,4 +70,17 @@ public class TaskServiceTest {
         assert capturedTask.getCreatedDate() != null;
     }
 
+    @Test
+    public void testDeleteTask() throws Exception {
+        int taskId = 1;
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/delete/{id}", taskId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())  
+                .andExpect(MockMvcResultMatchers.content().string("Task deleted successfully"));  
+
+        // Verify that deleteTask method is called once with the correct task ID
+        verify(taskDAO, times(1)).deleteTask(taskId);
+    }
+
 }
