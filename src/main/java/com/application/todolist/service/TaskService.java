@@ -3,9 +3,12 @@ package com.application.todolist.service;
 import com.application.todolist.dao.TaskDAO;
 import com.application.todolist.vo.Task;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Date;
@@ -42,5 +45,9 @@ public class TaskService {
         return "redirect:/tasks";
     }
 
-    
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteTask(@PathVariable int id) {
+        taskDAO.deleteTask(id);
+        return ResponseEntity.ok("Task deleted successfully");
+    }
 }
