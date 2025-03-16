@@ -60,6 +60,30 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Task Modal -->
+    <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-task-id">
+                    <div class="mb-3">
+                        <label for="edit-task-desc" class="form-label">Task Description</label>
+                        <input type="text" class="form-control" id="edit-task-desc">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-task-btn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
