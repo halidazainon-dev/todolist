@@ -49,6 +49,13 @@
                             </ul>
                         </c:if>
                         
+                        <c:if test="${not empty tasks}">
+                            <div class="d-flex justify-content-end mb-2 pt-2">
+                                <button type="button" class="btn btn-sm btn-danger" id="delete-all-btn">
+                                    <i class="bi bi-trash"></i> Delete all
+                                </button>
+                            </div>
+                        </c:if>
                         <c:if test="${empty tasks}">
                             <div class="alert alert-info text-center">
                                 Add a task!
