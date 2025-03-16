@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.util.List;
@@ -50,4 +51,15 @@ public class TaskService {
         taskDAO.deleteTask(id);
         return ResponseEntity.ok("Task deleted successfully");
     }
+
+      @PostMapping("/update")
+    public String updateTask(@RequestParam("id") int id, @RequestParam("description") String description) {
+        Task task = taskDAO.getId(id);
+        task.setDescription(description);
+        task.setCreatedDate(new Date());
+
+        taskDAO.updateTask(task);
+        return "redirect:/tasks";
+    }
+
 }
