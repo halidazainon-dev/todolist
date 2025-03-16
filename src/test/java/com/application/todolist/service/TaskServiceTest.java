@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -82,5 +83,28 @@ public class TaskServiceTest {
         // Verify that deleteTask method is called once with the correct task ID
         verify(taskDAO, times(1)).deleteTask(taskId);
     }
+
+    @Test
+    public void testUpdateTask() throws Exception {
+        int taskId = 1;
+        String newDescription = "Updated Task Description";
+        Task existingTask = new Task(taskId, "Old Description", false, new Date());
+
+        when(taskDAO.getId(taskId)).thenReturn(existingTask);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/update")
+                        .param("id", String.valueOf(taskId))
+                        .param("description", newDescription)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())  
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/tasks"));  
+
+        // Verify method calls
+        verify(taskDAO, times(1)).getId(taskId);
+        verify(taskDAO, times(1)).updateTask(existingTask);
+
+        assert(existingTask.getDescription().equals(newDescription));
+    }
+
 
 }
