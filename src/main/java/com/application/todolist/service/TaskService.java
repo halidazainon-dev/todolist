@@ -6,6 +6,9 @@ import com.application.todolist.vo.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -30,6 +33,13 @@ public class TaskService {
         model.addAttribute("tasks", tasks);
         model.addAttribute("activeCount", activeCount);
         return "todo";  
+    }
+
+    @PostMapping("/add")
+    public String addTask(Task task) {
+        task.setCreatedDate(new Date());
+        taskDAO.addTask(task);
+        return "redirect:/tasks";
     }
 
     
