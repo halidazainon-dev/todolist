@@ -1,6 +1,5 @@
 package com.application.todolist.dao;
 
-import java.lang.reflect.Parameter;
 import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +22,7 @@ public class TaskDAO {
         String sql = "SELECT * FROM tasks";
         return jdbcTemplate.query(sql, taskRowMapper);
     }
+    
     public int addTask(Task task) {
 
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -56,6 +56,11 @@ public class TaskDAO {
         String sql = " DELETE FROM tasks WHERE id = :id ";
         
         return jdbcTemplate.update(sql, params);
+    }
+
+    public int deleteAll() {
+        String sql = "DELETE FROM TASKS";
+        return jdbcTemplate.update(sql, new MapSqlParameterSource());
     }
 
     private final RowMapper<Task> taskRowMapper = (rs, rowNum) -> {
