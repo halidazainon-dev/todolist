@@ -35,9 +35,10 @@ Since the project should not be uploaded to GitHub, extract the compressed folde
 
 ### 2.Configure the Database
 
-1. Open **pgAdmin 4** (or any PostgreSQL client).
-2. Create a database (e.g., `todo_db`).
-3. Update `application.properties` in `src/main/resources/` with your PostgreSQL credentials:
+1. Open **pgAdmin 4**.
+2. Create a new database (e.g., `todo_db`).
+3. Restore the database from the SQL file located at `/Users/halidazainon/workspace/todolist/scripts/todo.sql`.
+4. Update `application.properties` in `src/main/resources/` with your PostgreSQL credentials:
 
    ```properties
    spring.datasource.url=jdbc:postgresql://localhost:5432/todo_db
