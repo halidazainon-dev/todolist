@@ -37,7 +37,7 @@ Since the project should not be uploaded to GitHub, extract the compressed folde
 
 1. Open **pgAdmin 4**.
 2. Create a new database (e.g., `todo_db`).
-3. Restore the database from the SQL file located at `/Users/halidazainon/workspace/todolist/scripts/todo.sql`.
+3. Restore the database from the SQL file located at `todolist/scripts/todo.sql`.
 4. Update `application.properties` in `src/main/resources/` with your PostgreSQL credentials:
 
    ```properties
